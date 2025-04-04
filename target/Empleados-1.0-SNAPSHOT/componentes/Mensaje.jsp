@@ -7,16 +7,28 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
-<c:if test="${sessionScope.error != null}">
-    <div class="alert alert-danger mt-1" role="alert">
-        ${sessionScope.error}
-    </div>
-        <c:remove var="error" scope="session"/>
-</c:if>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<c:if test="${sessionScope.success != null}">
-    <div class="alert alert-success mt-1" role="alert">
-        ${sessionScope.success}
-    </div>
-        <c:remove var="success" scope="session"/>
-</c:if>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        <c:if test="${sessionScope.error != null}">
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: '${sessionScope.error}',
+                confirmButtonColor: '#d33'
+            });
+            <c:remove var="error" scope="session"/>
+        </c:if>
+
+        <c:if test="${sessionScope.success != null}">
+            Swal.fire({
+                icon: 'success',
+                title: 'Éxito',
+                text: '${sessionScope.success}',
+                confirmButtonColor: '#3085d6'
+            });
+            <c:remove var="success" scope="session"/>
+        </c:if>
+    });
+</script>
